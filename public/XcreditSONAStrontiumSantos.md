@@ -4,11 +4,11 @@
 ![SONA](https://media.interaksyon.com/wp-content/uploads/2025/07/Marcos-Jr_SONA-2025.jpg)
 
 ## *Interesting Points*
-* Because of the recent storms that has passed, it had been revealed that some projects that was meant for flood protection had never existed or had failed. 
-thus he order the DPWH to release a list of all the flood control projects from the past 3 years and those accountable for them will face charges. 
+* Because of the recent storms that has passed, it has been revealed that some projects that was meant for flood protection had never existed or had failed. 
+thus he order the DPWH to release a list of all the flood control projects from the past 3 years and those accountable for them the failed ones will face charges. 
 * Tech-voc, which lets students who are still in senior high school, already choose their career tracks which can help students who graduate to have an easier time finding jobs. 
 * There will be an increase in PhilHealth's coverage for emergency room services, dengue, cancer, heart attack, and more.
-* He is encouraging people to have a more active and healthier lifestyle because of the increase in the weight of Filipinos in there adult years. He mentions activities like fun runs and zumba sessions 
+* He is encouraging people to have a more active and healthier lifestyle because of the increase in the weight of Filipinos in their adult years. He mentioned activities like fun runs and zumba sessions. 
 
 ## *Weird  Points*
 * Though it is not necessarily "weird", I found it interesting that Pres. BBM had focused more on sports during a part of his speech, which online was said to be a "rare occurence."
