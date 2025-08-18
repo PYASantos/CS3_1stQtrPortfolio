@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2> Q1 2nd Graded Exercise submitted by Patricia Santos of 9-Strontium </h2>
+
+    <input id="mealprice" type="number" placeholder="Meal Price"> <br> 
+    <input id="tip" type="number" placeholder="Tip"><br> 
+    <input id="service_charge" type="number" placeholder="Service Charge (%)"> <br> 
+
+    <button onclick="totalMeal()"> Accept Input </button>
+
+    <div id="totalOutput"></div>
+
+    <script>
+        function totalMeal() {
+
+            mealPrice = Number(mealprice.value); 
+            myTip = Number(document.getElementById("tip").value); 
+            serviceCharge = Number (service_charge.value); 
+
+            total = (mealPrice + myTip) + (mealPrice * serviceCharge / 100); 
+            totalOutput.innerHTML = "<p>Total Meal: " + total.toFixed(2) + "</p>";
+
+        }
+    </script>
+
+</body>
+</html>
