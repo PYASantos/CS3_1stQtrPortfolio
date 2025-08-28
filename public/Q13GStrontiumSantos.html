@@ -3,19 +3,30 @@
 <body>
 
    <h2> Q1 3rd Graded Exercise submitted by Patricia Santos of 9-Strontium </h2>
-   <!-- Enter your HTML tags below  but before the opening script tag -->
+   <p> Guess the number: **** </p>
+   <p> The number is from 1 to 100 </p>
+   <input id="Guess" placeholder="Enter your guess"> <br>
 
-    <script>
+   <button onclick="checkIt()"> Check It </button>
 
-       var dNumber = Math.floor(Math.random() * 100) + 1; // generates a number from 1  to 100 when the page loads
+    <div id="result"></div>
+    
+        <script>
+            var dNumber = Math.floor(Math.random() * 100) + 1; 
 
-        function checkIt() {
-              
+            function checkIt() {
+                var guess = Number(document.getElementById("Guess").value); 
+
+                if (guess === dNumber) {
+                document.getElementById("result").innerHTML = "You are correct: " + dNumber;
+                } else if (guess < dNumber) {
+                document.getElementById("result").innerHTML = "Higher"; 
+                } else if (guess > dNumber) {
+                document.getElementById("result").innerHTML = "Lower";
+                } 
             
-         
-        }
-    </script>
+            }
+        </script>
 
 </body>
-
 </html>

@@ -1,26 +1,29 @@
-<h1> Trish - 9-Strontium - August 11, 2025 </h1>
-<h2> Third Graded Exercise - First Quarter </h2>
+<!DOCTYPE html>
+<html>
+<body>
 
-<input id="mealprice" type="number" placeholder="Meal Price"> <br> 
-<input id="tip" type="number" placeholder="Tip"><br> 
-<input id="service_charge" type="number" placeholder="Service Charge (%)"> <br> 
+    <h2> Q1 2nd Graded Exercise submitted by Patricia Santos of 9-Strontium </h2>
 
-<button onclick="calculateTotal()"> Calculate Total </button>
+    <input id="mealprice" type="number" placeholder="Meal Price"> <br> 
+    <input id="tip" type="number" placeholder="Tip"><br> 
+    <input id="service_charge" type="number" placeholder="Service Charge (%)"> <br> 
 
-<div id="totalOutput"></div>
+    <button onclick="totalMeal()"> Accept Input </button>
 
-<script>
-    function calculateTotal() {
+    <div id="totalOutput"></div>
+
+    <script>
+        function totalMeal() {
 
             mealPrice = Number(mealprice.value); 
             myTip = Number(document.getElementById("tip").value); 
             serviceCharge = Number (service_charge.value); 
 
             total = (mealPrice + myTip) + (mealPrice * serviceCharge / 100); 
+            totalOutput.innerHTML = "<p>Total Meal: " + total.toFixed(2) + "</p>";
 
-            totalOutput.innerHTML = "Total Amount: Php " + total.toPrecision(6); 
-            document.write("Total Amount: Php" + total.toFixed(2)); 
-            console.log("Total Amoount: Php" + total.toExponential()); 
-    }
+        }
+    </script>
 
-</script>
+</body>
+</html>
