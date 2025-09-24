@@ -1,0 +1,41 @@
+<h1>Guess My Word ˚ ༘ ೀ⋆｡˚</h1>
+<link rel="stylesheet" href="yeah.css">
+<p id="wordDisplay"></p>
+<input type="text" id="guessInput" maxlength="1">
+<button onclick="makeGuess()">Guess</button>
+<p id="message"></p>
+<p id="attempts"></p>
+
+<script>
+  let secretWord = ["t", "h", "o", "u", "g", "h", "t", "f", "u", "l", "t", "r", "i", "s", "h" ];
+  let guessedWord = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_","_", "_", "_", "_", "_"];
+
+  document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+
+  function makeGuess() {
+    let guess = document.getElementById("guessInput").value.toLowerCase();
+    let correct = false;
+
+    for (let i = 0; i < secretWord.length; i++) {
+      if (secretWord[i] === guess) {
+        guessedWord[i] = guess;
+        correct = true;
+      }
+    }
+    let bruh = 0;
+    for (let j = 0; j < secretWord.length; j++) {
+        for (let k = 0; k < 25; k++ ){
+    }
+
+    }
+
+
+    document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+    document.getElementById("message").textContent = correct ? "That is correct! :)" : " Please try again :(";
+    document.getElementById("attempts").textContent = correct ? "You have " + k + " out off 25 amount of attempts remaining" : "You have " + k + " amount of attempts remaining"; 
+    document.getElementById("guessInput").value = "";
+  }
+
+  // document.write("You have" + j + "amount of attempts remaining");
+// for (let j = 25; j >= 0; j--)
+</script>

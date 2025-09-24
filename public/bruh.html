@@ -1,0 +1,26 @@
+<h1>Guess a Letter</h1>
+<input type="text" id="letterInput" maxlength="1">
+<button onclick="addGuess()">Guess</button>
+<p>Guessed letters: <span id="guesses"></span></p>
+
+<script>
+  let guessedLetters = [];
+      let letter = document.getElementById("letterInput").value;
+      let i = 0;
+
+  function addGuess() {
+    let letter = document.getElementById("letterInput").value;
+    for (; i < guessedLetters.length; i++) {
+        if (letter === guessedLetters[i]) {
+            alert("You already guessed that letter!");
+        }
+    }
+     
+    guessedLetters.push(letter);
+    document.getElementById("guesses").textContent = guessedLetters.join(", ");
+    document.getElementById("letterInput").value = "";
+    docuement.write(i); 
+}
+
+ 
+</script>
