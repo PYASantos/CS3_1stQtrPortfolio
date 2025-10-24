@@ -1,4 +1,4 @@
-table{
+        table{
           border-collapse: separate;
           border-spacing: 0px;
           margin-left: auto;
@@ -26,19 +26,19 @@ table{
           font-family: monospace;
         }
         img{
-          border: 10px solid #F6E199; 
+          border: 10px solid #F7CAC9; 
           border-radius:20px; 
           height: 320px; 
           width: 430px; 
           display:block;
           margin-bottom: 20px;
-          box-shadow: 0 2px 10px #F595A6;
+          box-shadow: 0 2px 10px #F6E199
         }
         #media iframe{
-          border: 10px solid #F6E199;
+          border: 10px solid #F7CAC9;
           border-radius: 20px;
-          margin-bottom: 20px;
-          box-shadow: 0 2px 10px #F595A6;
+          margin-bottom: 20px; 
+          box-shadow: 0 2px 10px #F6E199;
         }
         #media {
           display: flex;
@@ -62,13 +62,13 @@ table{
           font-family: monospace;
         }
         h1{
-          color: #fc9fb0; 
+          color:  #F7CAC9; 
           text-align: center;
           font-size: 35px;
           font-family: monospace;
         }
         h2{
-          color: #fc9fb0; 
+          color:  #F7CAC9; 
           text-align: center;
           font-size: 25px;
           font-family: monospace;
@@ -88,11 +88,11 @@ table{
         }
         #others a{
           padding: 10px;
-          border: 10px solid #F6E199;
+          border: 10px solid #F7CAC9;
           border-radius: 15px;
           color: #F6E199;
           text-decoration: none;
-          box-shadow: 0 2px 10px #F595A6;
+          box-shadow: 0 2px 10px #F6E199;
           color: #F7CAC9;
           width: 275px;        
           text-align: center;
@@ -103,10 +103,10 @@ table{
           justify-content: center;
           gap: 30px;
           padding: 10px;
-          border: 10px solid #F6E199;
+          border: 10px solid  #F7CAC9;
           border-radius: 15px;
-          color: DarkSeaGreen;
-          box-shadow: 0 2px 10px #F595A6;
+          color: #F6E199;
+          box-shadow: 0 2px 10px #F6E199;
           color: #F7CAC9;
           width: 1040px;        
           text-align: center;
@@ -116,5 +116,5 @@ table{
         footer{
           margin-top: 50px; 
           text-align: center;
-          color: #fc9fb0;
+          color:  #F7CAC9;
         }
