@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> organization application </title>
+</head>
+<body>
+  <header>
+    <p> Patricia Ysabel Santos ~ 9-Strontium ~ January 15, 2025</p>
+    <h1>  𝜗𝜚 ࣪˖ ִ𐙚 Club Application Form  𝜗𝜚 ࣪˖ ִ𐙚 </h1>
+  </header>
+
+  <form action="/submit" method="post" onsubmit="return Submit()" onreset="return Reset()">
+
+  <fieldset>
+    <legend>Personal Identification</legend>
+    <label>Student ID: <input type="number" name="studentid" required onblur="Blur(this)"></label> <br><br>
+    <label>Full Name: <input type="text" name="fullname" required onblur="Blur(this)"></label> <br><br>
+    <label>Birthday: <input type="date" name="birthday" required onblur="Blur(this)"></label> <br><br>
+    <label> Email: <input type="email" name="email" required onblur="Blur(this)"></label> <br><br>
+</fieldset>
+
+<fieldset>
+    <legend>Club Preferences</legend>
+    <label>Mobile Phone: <input type="text" name="mobilephone" required onblur="Blur(this)"></label> <br><br>
+    <label>Grade Level: </label> 
+    <select id="grade" name="gradelevel" required onblur="Blur(this)">
+        <option value="7"> Grade 7 </option> 
+        <option value="8"> Grade 8 </option>
+        <option value="9"> Grade 9 </option>
+        <option value="10"> Grade 10 </option>
+        <option value="11"> Grade 11 </option>
+        <option value="12"> Grade 12 </option>
+    </select> <br><br>
+    <label>Intern / Extern: </label> 
+        <label for="intern">Intern</label> <input type="radio" id="intern" name="internorextern" value="Intern">
+        <label for="extern">Extern</label> <input type="radio" id="extern" name="internorextern" value="Extern"><br><br> 
+    <label>Preferred Organization / Club: </label> 
+    <select id="prefferedclub" name="club" required>
+    <option value="Digital & Visual Arts"> LIKHA </option> 
+    <option value="Volleyball "> KISLAP </option>
+    <option value="TTRPG "> INTYALË </option>
+    <option value="Environment"> CARE </option>
+    <option value="Dance"> SAGALA </option>
+    <option value="Glee"> HIMIG AGHAM </option>
+    </select> <br><br>
+    <label>Why do you want to join: </label> <br><br>
+    <textarea id="message" name="message" placeholder="Type your message here..." required onblur="Blur(this)"></textarea>
+</fieldset>
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+</form><br><br> 
+
+<footer>
+    <p>&copy; 2025 Patricia Santos </p>
+  </footer>
+</body>
+</html>
+<style> 
+
+</style>
+<script> 
+    function Blur(element) {
+      if (element.value.trim() === "") {
+        element.style.border = "1px solid #ff4d4d";
+        element.style.backgroundColor = "#fff2f2";
+      } else {
+        element.style.border = ""; 
+        element.style.backgroundColor = "";
+      }
+    }
+    function Submit() {
+      return confirm("Do you want to proceed with submitting this application?");
+    }
+    function Reset() {
+      return confirm("Are you sure you want to clear all the inputs?");
+    }
+</script>
+<style>
+body {
+  background-color: seashell;
+  font-family: Courier New;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background-color: honeydew;
+  color: white;
+  padding: 2em;
+  text-align: center;
+}
+section {
+  padding: 1.5em;
+}
+footer {
+  text-align: center;
+  padding: 1em;
+  background-color: honeydew;
+}
+h1{
+		color: pink; 
+		text-align: center;
+		font-family: monospace;
+		font-size: 35px;
+}
+p{
+		color: DarkSeaGreen;
+		text-align: center;
+		font-family: Courier New; 
+		font-size: 20px;
+}
+li{
+        color: DarkSeaGreen;
+        text-align: center;
+        font-family: Courier New; 
+        font-size: 20px;
+}
+form {
+  background-color: honeydew;
+  padding: 20px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+}
+
+fieldset {
+  border: 1px solid #b0afaf;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+legend {
+  color: pink;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.button-container {
+  text-align: center; 
+  margin-top: 20px;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; 
+  border: 2px solid pink; 
+  background-color: #fff9fb; 
+  box-shadow: 0 0 8px rgba(255, 192, 203, 0.5); 
+}
+
+button {
+  padding: 10px 25px;
+  font-family: 'Courier New', Courier, monospace;
+  color: white; 
+  background-color: pink; 
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.3s; 
+}
+
+button:hover {
+  background-color: #ffb6c1; 
+  transform: scale(1.05); 
+}
+
+</style>
+
