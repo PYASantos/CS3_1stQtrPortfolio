@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> view sign ups list </title>
+</head>
+<body>
+  <header>
+    <p> Patricia Ysabel Santos ~ 9-Strontium ~ February 1, 2025</p>
+    <h1>  𝜗𝜚 ࣪˖ ִ𐙚 Sign-Ups List  𝜗𝜚 ࣪˖ ִ𐙚 </h1>
+  </header>
+  <div id="navigation">
+  <div class="nav-item">
+    <a href="Q3_3GStrontiumSantos.html" class="back-link">Back to Application Form</a>
+  </div>
+
+  <div class="nav-item">
+    <label>Club: </label> 
+    <select id="clubfilter" onchange="filterByClub()">
+      <option value="">All Clubs</option>
+      <option value="Digital & Visual Arts"> LIKHA </option> 
+      <option value="Volleyball "> KISLAP </option>
+      <option value="TTRPG "> INTYALË </option>
+      <option value="Environment"> CARE </option>
+      <option value="Dance"> SAGALA </option>
+      <option value="Glee"> HIMIG AGHAM </option>
+    </select>
+  </div>
+
+  <div class="nav-item">
+    <div id="totalsignups">Total Sign-Ups: 0</div>
+  </div>
+</div>
+
+<table id = "signupstable" border="1" style="width:100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>Club</th>
+      <th>ID</th>
+      <th>Full Name</th>
+      <th>Grade</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Intern/Extern</th>
+    </tr>
+  </thead>
+  <tbody id = "signupsbody">
+    <tr>
+
+    </tr>
+  </tbody>
+</table>
+<footer>
+    <p>&copy; 2025 Patricia Santos </p>
+</footer>
+</body>
+</html>
+<script>
+// Key used to reference the specific data storage location in the browser's memory
+const KEY = 'applicants';
+// Retrieves the string data from storage and converts it back into a JavaScript array
+function loadApplicants() {
+  const raw = localStorage.getItem(KEY);
+  return raw ? JSON.parse(raw) : [];
+}
+// Makes numerical grade values to their string labels for better display
+function getGradeName(gradeNum) {
+  const grades = {7: 'Grade 7', 8: 'Grade 8', 9: 'Grade 9', 10: 'Grade 10', 11: 'Grade 11', 12: 'Grade 12'};
+  return grades[gradeNum] || 'Unknown';
+}
+// Clears the existing table and remakes the rows based on the provided list of applicants
+function renderTable(applicants) {
+  const tbody = document.getElementById('signupsbody');
+
+  if (applicants.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7"><b>No applicants yet</b></td></tr>';
+    return;
+  }
+
+  let tablerows = "";
+  for (let i = 0; i < applicants.length; i++) {
+    const applicant = applicants[i];
+    tablerows += `
+      <tr>
+        <td>${applicant.club}</td>
+        <td>${applicant.studentid || applicant.studentID || ''}</td>
+        <td>${applicant.fullname || applicant.name || ''}</td>
+        <td>${getGradeName(applicant.gradelevel)}</td>
+        <td>${applicant.email}</td>
+        <td>${applicant.mobilephone}</td>
+        <td>${applicant.internorextern}</td>
+      </tr>`;
+  }
+  tbody.innerHTML = tablerows;
+}
+// Processes the dropdown selection to filter data and update the total signup count display
+function filterByClub() {
+  const selectedClub = document.getElementById('clubfilter').value.trim();
+  const allApplicants = loadApplicants();
+  
+  let filteredApplicants = selectedClub === "" ? allApplicants : 
+    allApplicants.filter(applicant => applicant.club.trim() === selectedClub);
+  
+  renderTable(filteredApplicants);
+  document.getElementById('totalsignups').innerText = `Total Sign-Ups: ${filteredApplicants.length}`;
+}
+// Makes sure the table is automatically populated with all data as soon as the page finishes loading
+window.onload = function() {
+  filterByClub();  
+};
+
+</script>
+<style>
+    #navigation {
+      display: flex;            
+      gap: 15px;               
+      align-items: center;     
+      justify-content: center;  
+      margin: 20px auto;
+      padding: 10px;
+      max-width: 1200px;
+    }
+
+    .nav-item {
+      background: white;
+      border: 4px solid #fc9fb0; 
+      border-radius: 15px;     
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      height: 45px;           
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #fc9fb0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .nav-item label {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      color: #fc9fb0;
+      margin-right: 10px;
+      margin-top: 0; 
+    }
+
+    #clubfilter {
+      border: none;           
+      background: transparent;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      color: #fc9fb0;
+      outline: none;
+    }
+
+    #totalsignups {
+      font-family: 'Courier New', Courier, monospace;
+      color: #fc9fb0;
+    }
+    .nav-item label {
+      font-family: Courier New;
+      font-size: 18px;
+      color: #fc9fb0;
+      margin-right: 15px;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    select {
+      padding: 12px 20px;           
+      border: 4px solid #fc9fb0;   
+      border-radius: 15px;          
+      font-family: Courier New;
+      font-size: 16px;
+      background: white;
+      box-shadow: 0 6px 20px rgba(252, 159, 176, 0.3);
+      cursor: pointer;
+      min-width: 300px;             
+    }
+    table {
+      width: 100%;
+      max-width: 1200px;
+      margin: 30px auto;
+      border-collapse: collapse;
+      font-family: monospace;
+      border: 5px solid DarkSeaGreen;
+      border-radius: 25px;    
+    }
+    th {
+      background: linear-gradient(135deg, #fc9fb0, #ff85a2);
+      color: white;
+      text-align: center;
+      padding: 18px 12px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    tbody tr:nth-child(even) {
+     background: #f8f9fa;    
+    }
+
+    tbody tr:hover {
+     background: #fff9fb;     
+    }
+
+    td {
+      text-align: center;
+      padding: 15px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      font-family: monospace;
+      color: #080808;
+    }
+
+    #navigation {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+      padding: 10px;
+      max-width: 1200px;
+    }
+
+    .nav-item {
+      background: white;
+      border: 4px solid #fc9fb0;
+      border-radius: 15px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #fc9fb0;
+      font-family: 'Courier New', monospace;
+    }
+
+    #clubfilter {
+      border: none;
+      background: transparent;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      color: #fc9fb0;
+    }
+
+    #totalsignups {
+      font-family: 'Courier New', monospace;
+      color: #fc9fb0;
+    }
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 30px auto;
+      box-shadow: 0 10px 40px rgba(252, 159, 176, 0.4);
+      border: 5px solid rgb(255, 255, 255);
+      border-radius: 25px;
+      overflow: hidden;  
+      font-family: monospace;
+      width: 100%;
+      max-width: 1200px;
+      background: white;
+    }
+    th {
+      background:  #fc9fb0;
+      color: white;
+      text-align: center;
+      padding: 18px 12px;
+      font-family: monospace;
+      font-size: 16px;
+    }
+    td {
+      text-align: center;
+      padding: 15px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      font-family: monospace;
+      color: #000000;
+    }
+    tr:hover td {
+      background: #fff9fb;
+      transform: scale(1.01);
+      transition: all 0.2s;
+    }
+    tr:nth-child(even) td {
+      background: #f8f9fa;
+    }
+    header{
+      background-color: honeydew;
+      color: white;
+      padding: 2em;
+      text-align: center;
+      font-family: monospace;
+    }
+    h1{
+      color: #fc9fb0; 
+      text-align: center;
+      font-size: 35px;
+      font-family: monospace;
+    }
+    p{
+	  color: DarkSeaGreen;
+	  text-align: center;
+	  font-family: Courier New; 
+	  font-size: 20px;
+    }
+    body {
+      background-color: seashell;
+      font-family: Courier New;
+      margin: 0;
+      padding: 0px;
+    }
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: honeydew;
+    }
+
+</style>
+
+
+
+
+
