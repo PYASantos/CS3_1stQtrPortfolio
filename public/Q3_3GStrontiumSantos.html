@@ -6,11 +6,11 @@
 </head>
 <body>
   <header>
-    <p> Patricia Ysabel Santos ~ 9-Strontium ~ January 15, 2025</p>
+    <p> Patricia Ysabel Santos ~ 9-Strontium ~ February 1, 2025</p>
     <h1>  𝜗𝜚 ࣪˖ ִ𐙚 Club Application Form  𝜗𝜚 ࣪˖ ִ𐙚 </h1>
   </header>
 
-  <form action="/submit" method="post" onsubmit="return Submit()" onreset="return Reset()">
+  <form onsubmit="return Submit()" onreset="return Reset()">
 
 <fieldset>
     <legend>Personal Identification</legend>
@@ -49,6 +49,8 @@
 </fieldset>
 <button type="submit">Submit</button>
 <button type="reset">Reset</button>
+<button type="button" onclick="window.location.href='viewSignUps.html'">View Signups</button>
+
 </form><br><br> 
 
 <footer>
@@ -60,17 +62,47 @@
 
 </style>
 <script> 
+// Checks if input fields are empty upon losing focus
     function Blur(element) {
       if (element.value.trim() === "") {
         element.style.border = "1px solid #ff4d4d";
         element.style.backgroundColor = "#fff2f2";
       } else {
         element.style.border = ""; 
-        element.style.backgroundColor = "";
+        element.style.backgroundColor = ""; 
       }
     }
+// Retrieve existing applicants from localStorage or initialize an empty array
+    let signupList = localStorage.getItem("applicants") 
+    signupList = signupList ? JSON.parse(signupList) : [];
     function Submit() {
-      return confirm("Do you want to proceed with submitting this application?");
+        if (confirm("Do you want to proceed with submitting this application?")) {
+          saveToLocalStorage(); 
+          return false;
+        } 
+        else {
+          return false;
+        }
+    }
+// Save the current form data to localStorage
+    function saveToLocalStorage() {
+        const form = document.querySelector("form");
+        const formData = new FormData(form);
+        const signupData = {
+            studentID: document.getElementsByName("studentid")[0].value.trim(),
+            name: document.getElementsByName("fullname")[0].value.trim(),
+            email: document.getElementsByName("email")[0].value.trim(),
+            club: document.getElementsByName("club")[0].value.trim(),
+            mobilephone: document.getElementsByName("mobilephone")[0].value.trim(),
+            gradelevel: document.getElementsByName("gradelevel")[0].value.trim(),
+            internorextern: document.getElementsByName("internorextern")[0].value.trim(),
+            message: document.getElementsByName("message")[0].value.trim()
+        };
+// Add the new signup data to the list and update localStorage
+    signupList.push(signupData);
+    localStorage.setItem("applicants", JSON.stringify(signupList));
+    alert('Application saved successfully!');
+
     }
     function Reset() {
       return confirm("Are you sure you want to clear all the inputs?");
@@ -98,22 +130,22 @@ footer {
   background-color: honeydew;
 }
 h1{
-		color: pink; 
-		text-align: center;
-		font-family: monospace;
-		font-size: 35px;
+	color: pink; 
+	text-align: center;
+	font-family: monospace;
+	font-size: 35px;
 }
 p{
-		color: DarkSeaGreen;
-		text-align: center;
-		font-family: Courier New; 
-		font-size: 20px;
+	color: DarkSeaGreen;
+	text-align: center;
+	font-family: Courier New; 
+	font-size: 20px;
 }
 li{
-        color: DarkSeaGreen;
-        text-align: center;
-        font-family: Courier New; 
-        font-size: 20px;
+  color: DarkSeaGreen;
+  text-align: center;
+  font-family: Courier New; 
+  font-size: 20px;
 }
 form {
   background-color: honeydew;
