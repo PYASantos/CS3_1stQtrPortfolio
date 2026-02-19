@@ -1,0 +1,25 @@
+
+ <form id = "practice" onsubmit="greet(); return false;">
+    <fieldset> 
+        <legend> Practice Form </legend>
+            <label > Name: <input type = "text" id="name" required/> </label><br><br>
+    </fieldset>
+    <button type="submit">Submit</button>
+ </form>
+
+<script>
+    function greet(){
+    const form = document.querySelector("#practice");
+    const nameInput = form.querySelector("#name");
+
+    const captured = nameInput.value.trim(); 
+    let student = {
+        name: captured
+    }
+    let string = JSON.stringify(student);
+    let stored = localStorage.setItem("student", string);
+    console.log(student);
+    alert("Hello, " + student.name + "!");
+    document.querySelector("#name").value = student.name;
+    }
+</script>

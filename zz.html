@@ -1,0 +1,32 @@
+ <form>
+
+<label for="uname">Username: </label>
+
+<input type="text" id="uname" onfocus="myFunction1()" onblur="myFunction2()">
+<input type = "submit">
+
+</form>
+
+ <script>
+
+function myFunction1() {
+
+document.getElementById("uname").style.width = "100px";
+
+}
+
+function myFunction2() {     
+
+var x = document.getElementById("uname");
+
+       x.style.width = "50px";
+
+       if (x.value == ""){
+
+            alert("Please enter a value!");
+
+      }
+
+}
+
+</script>

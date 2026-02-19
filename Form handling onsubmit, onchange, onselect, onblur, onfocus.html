@@ -1,0 +1,52 @@
+<form onsubmit = "return greet();" onreset = "clearForm()">
+    <label> Name <input type = "text" name = "names" id = "userName"> <input type = "submit"> <input type = "reset"></label>
+</form>
+<p id = "greet"> Greetings </p>
+<script>
+    function greet(){
+        var name = document.getElementById("userName").value.trim();
+        document.getElementById("greet").innerHTML = "Hello, " + name + "!";
+        return false;
+    }
+    function clearForm(){
+        document.getElementById("greet").innerHTML = "Greetings";  // Reset message
+        alert("Form cleared!");
+        return false;
+    }
+</script>
+<fieldset>
+    <legend>Personal Identification</legend>
+    <label>Student ID: <input type="number" name="studentid" id = "studentid" required onfocus = "wide()" onblur="dontgo()"></label> <br><br>
+    <label>Full Name: <input type="text" name="fullname" id = "fullname" required onfocus = "wide()" onblur="dontgo()"></label> <br><br>
+</fieldset>
+<script>
+    function dontgo(){
+        alert("Don't leave this empty!");
+    }
+    function wide(){
+        document.getElementById("studentid").style.width = "200px";
+    }
+</script>
+<style>
+    fieldset:focus-within{
+        border: 2px solid pink;
+        box-shadow: white 0px 0px 5px, pink 0px 0px 10px;
+        background-color: rgb(253, 255, 231);
+    }
+    input:focus{
+        border: 2px solid #b9c0f2;
+        box-shadow: 0 0 5px #e3fecf;
+        background-color: #fff2f2;
+    }
+    input[type="number"]:focus{
+        width: 200px;
+        border: 2px solid #ffcde1;
+        box-shadow: 0 0 5px #d5fff2;
+        background-color: #fff4b0;
+    }
+    select:focus{
+        border: 2px solid #b9c0f2;
+        box-shadow: 0 0 5px #e3fecf;
+        background-color: #fff2f2;
+    }
+</style>
