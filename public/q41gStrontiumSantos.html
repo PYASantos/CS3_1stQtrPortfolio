@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Organization Application</title>
+  <style>
+    body {
+      background-color: seashell;
+      font-family: Courier New;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: honeydew;
+      color: white;
+      padding: 2em;
+      text-align: center;
+    }
+    section {
+      padding: 1.5em;
+    }
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: honeydew;
+    }
+    h1 {
+      color: pink; 
+      text-align: center;
+      font-family: monospace;
+      font-size: 35px;
+    }
+    p {
+      color: DarkSeaGreen;
+      text-align: center;
+      font-family: Courier New; 
+      font-size: 20px;
+    }
+    li {
+      color: DarkSeaGreen;
+      text-align: center;
+      font-family: Courier New; 
+      font-size: 20px;
+    }
+    form {
+      background-color: honeydew;
+      padding: 20px;
+      margin: 20px auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    }
+    fieldset {
+      border: 1px solid #b0afaf;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    legend {
+      color: pink;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+    .button-container {
+      text-align: center; 
+      margin-top: 20px;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; 
+      border: 2px solid pink; 
+      background-color: #fff9fb; 
+      box-shadow: 0 0 8px rgba(255, 192, 203, 0.5); 
+    }
+    button {
+      padding: 10px 25px;
+      font-family: 'Courier New', Courier, monospace;
+      color: white; 
+      background-color: pink; 
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s; 
+    }
+    button:hover {
+      background-color: #ffb6c1; 
+      transform: scale(1.05); 
+    }
+    /* CSS for star rating system */
+    .rating {
+      direction: rtl;
+      display: inline-block;
+      font-size: 0;
+      margin-top: 10px;
+      line-height: 1.8;
+    }
+    .rating label {
+      display: inline-block;
+      width: 1.3em;
+      height: 1.3em;
+      font-size: 25px;
+      color: #ddd;
+      cursor: pointer;
+      position: relative;
+    }
+    .rating label::before {
+      content: "★";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .rating input:checked ~ label {
+      color: gold;
+    }
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: #ddd;
+    }
+    .rating label:hover {
+      color: gold;
+    }
+    .rating input {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: honeydew;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: pink;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .movie-list-title {
+      text-align: center;
+      color: pink;
+      font-size: 28px;
+      font-family: monospace;
+      font-weight: bold;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Patricia Ysabel Santos ~ 9-Strontium ~ March 10, 2026</p>
+    <h1>𝜗𝜚 ࣪˖ ִ𐙚 Add a Movie 𝜗𝜚 ࣪˖ ִ𐙚</h1>
+  </header>
+
+<!---form for adding information of movies into the list --->
+  <form onsubmit="return Submit()">
+    <fieldset>
+      <label>Title: <input type="text" name="title" required onblur="Blur(this)"></label> <br><br>
+      <label>Year: <input type="number" name="year" required onblur="Blur(this)"></label> <br><br>
+      <label>Genre: </label> 
+      <select id="genre" name="genre" required onblur="Blur(this)">
+        <option value="ACTION">Action</option> 
+        <option value="COMEDY">Comedy</option>
+        <option value="DRAMA">Drama</option>
+        <option value="HORROR">Horror</option>
+        <option value="THRILLER">Thriller</option>
+        <option value="ROMANCE">Romance</option>
+        <option value="SCI-FI">Sci-fi</option>
+      </select> <br><br>
+      <!---html code for star rating --->
+
+      <div class="rating">
+        Rating: 
+        <input type="radio" id="star5" name="rating" value="5" />
+        <label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" />
+        <label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" />
+        <label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" required />
+        <label for="star1"></label>    
+      </div>
+    </fieldset>
+    <button type="submit">Add Movie</button>
+  </form><br><br> 
+
+  <div class="movie-list-title">Movie List</div>
+  <!---html for the movies list --->
+
+  <table id="movieTable">
+    <thead>
+      <tr>
+        <th>Movies</th>
+      </tr>
+    </thead>
+    <tbody id="movieTableBody">
+    </tbody>
+  </table>
+
+  <footer>
+    <p>&copy; 2025 Patricia Santos</p>
+  </footer>
+
+  <script> 
+// function to check if input fields are empty and alerting user if they are
+    function Blur(element) {
+      if (element.value.trim() === "") {
+        element.style.border = "1px solid #ff4d4d";
+        element.style.backgroundColor = "#fff2f2";
+      } else {
+        element.style.border = ""; 
+        element.style.backgroundColor = ""; 
+      }
+    }
+// JS code for saving movie data into local storage
+    const KEY = 'MovieList';
+    let movieList = JSON.parse(localStorage.getItem(KEY)) || [];
+
+    function Submit() {
+      if (confirm("Do you want to proceed with adding this movie?")) {
+        saveToLocalStorage(); 
+        return false;
+      } else {
+        return false;
+      }
+    }
+
+    function saveToLocalStorage() {
+      const title = document.getElementsByName("title")[0].value.trim();
+      const year = document.getElementsByName("year")[0].value.trim();
+      const genre = document.getElementsByName("genre")[0].value.trim();
+      const ratingRadio = document.querySelector('input[name="rating"]:checked');
+      const rating = ratingRadio ? ratingRadio.value : "0";
+// saving movie data into local storage as an object and pushing it into the movie list array 
+      const movieData = {
+        title: title,
+        year: year,
+        genre: genre,
+        rating: rating
+      };
+
+      movieList.push(movieData);
+      localStorage.setItem(KEY, JSON.stringify(movieList));
+      alert('Movie saved successfully!');
+      // rendering the movie list and resetting the form after saving the movie data
+      document.querySelector('form').reset();
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('movieTableBody');
+      let tablerows = "";
+      
+      for (let i = 0; i < movieList.length; i++) {
+        const movie = movieList[i];
+        const rating = parseInt(movie.rating) || 0;
+        // creating star rating display based on movie's rating 
+        let stars = "";
+        for(let j = 0; j < rating; j++){
+          stars = stars + "★";
+        }
+        while(stars.length < 5){
+          stars = stars + "☆";
+        }
+        // creating the text to be displayed for each movie in the list
+        const movieText = `${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${stars}`;
+        
+        tablerows = tablerows + `
+          <tr>
+            <td>${movieText}</td>
+          </tr>`;
+      }
+      tbody.innerHTML = tablerows;
+    }
+
+    window.onload = function() {
+      renderTable();  
+    };
+  </script>
+</body>
+</html>

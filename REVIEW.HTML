@@ -1,0 +1,46 @@
+<script> 
+// CREATE 
+
+let mlpCollection = {
+  twilight: { name: 'twilight sparkle', color: 'purple', tribe: 'alicorn' },
+  pinkie: { name: 'pinkie pie', color: 'pink', tribe: 'earth pony' },
+  rainbow: { name: 'rainbow dash', color: 'blue', tribe: 'pegasi' }
+}; 
+
+// 1. save to local storage 
+localStorage.setItem('mlpCollection', JSON.stringify(mlpCollection)); 
+
+// READ 
+
+//2. read from local storage 
+let collection = JSON.parse(localStorage.getItem('mlpCollection'));
+console.log(collection['twilight'].tribe); // { name: 'twilight sparkle', color: 'purple', tribe: 'alicorn' }
+
+// UPDATE 
+
+// 3. update existing entry
+
+collection['rainbow'].color = 'red'; // mane color
+localStorage.setItem('mlpCollection', JSON.stringify(collection)); 
+
+// DELETE 
+// delete a character 
+delete collection['twilight']; 
+
+localStorage.setItem('mlpCollection', JSON.stringify(collection));
+console.log(collection); 
+
+// CHECKING IF DATA EXISTS
+let collectionExosts = JSON.parse(localStorage.getItem('mlpcCollection')) || {}; 
+
+
+
+
+
+
+
+
+
+
+
+</script>

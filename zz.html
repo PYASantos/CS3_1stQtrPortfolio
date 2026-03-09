@@ -1,32 +1,110 @@
- <form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Organization Application</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: auto; text-align: center; }
+        .movie-card { border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 8px; text-align: left; background: #f9f9f9; }
+        .rating { direction: rtl; display: inline-block; }
+        .rating input { display: none; }
+        .rating label { color: #ccc; cursor: pointer; font-size: 30px; }
+        .rating label:before { content: '★'; }
+        .rating input:checked ~ label { color: gold; }
+        .rating label:hover, .rating label:hover ~ label { color: gold; }
+        button { width: 100%; padding: 10px; background-color: #4285f4; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        input, select { width: 100%; padding: 8px; margin: 5px 0 15px 0; box-sizing: border-box; }
+        .star-display { color: gold; }
+    </style>
+</head>
+<body>
+    <header>
+        <p>Patricia Ysabel Santos ~ 9-Strontium ~ March 9, 2026</p>
+        <h1>𝜗𝜚 Add a Movie 𝜗𝜚</h1>
+    </header>
 
-<label for="uname">Username: </label>
+    <form id="movieForm">
+        <label>Title:</label>
+        <input type="text" name="title" required>
 
-<input type="text" id="uname" onfocus="myFunction1()" onblur="myFunction2()">
-<input type = "submit">
+        <label>Year:</label>
+        <input type="number" name="year" required>
 
-</form>
+        <label>Genre:</label>
+        <select name="genre" required>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-fi">Sci-fi</option>
+        </select>
 
- <script>
+        <label>Rating: </label>
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+        </div>
+        <br><br>
+        <button type="submit">Add Movie</button>
+    </form>
 
-function myFunction1() {
+    <h2>Movie List</h2>
+    <div id="movieDisplay"></div>
 
-document.getElementById("uname").style.width = "100px";
+    <footer>
+        <p>&copy; 2026 Patricia Santos</p>
+    </footer>
 
-}
+    <script>
+        const KEY = 'MovieList';
+        const form = document.getElementById('movieForm');
+        const display = document.getElementById('movieDisplay');
 
-function myFunction2() {     
+        // Initial load
+        window.onload = renderMovies;
 
-var x = document.getElementById("uname");
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            
+            if (confirm("Do you want to proceed with adding this movie?")) {
+                const formData = new FormData(form);
+                const rating = formData.get('rating') || 0;
 
-       x.style.width = "50px";
+                const movieData = {
+                    title: formData.get('title'),
+                    year: formData.get('year'),
+                    genre: formData.get('genre'),
+                    rating: parseInt(rating)
+                };
 
-       if (x.value == ""){
+                // Save to LocalStorage
+                let movies = JSON.parse(localStorage.getItem(KEY)) || [];
+                movies.push(movieData);
+                localStorage.setItem(KEY, JSON.stringify(movies));
 
-            alert("Please enter a value!");
+                form.reset();
+                renderMovies();
+                alert('Movie saved successfully!');
+            }
+        };
 
-      }
-
-}
-
-</script>
+        function renderMovies() {
+            const movies = JSON.parse(localStorage.getItem(KEY)) || [];
+            display.innerHTML = "";
+            
+            movies.forEach(movie => {
+                const stars = '★'.repeat(movie.rating) + '☆'.repeat(5 - movie.rating);
+                display.innerHTML += `
+                    <div class="movie-card">
+                        ${movie.title} (${movie.year}) - ${movie.genre}, Rating: <span class="star-display">${stars}</span>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
