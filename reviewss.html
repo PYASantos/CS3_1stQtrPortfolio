@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complete Forms Demo - Fixed</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    
+    fieldset {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: white;
+    }
+    
+    fieldset:focus-within {
+      border: 2px solid pink;
+      box-shadow: white 0px 0px 5px, pink 0px 0px 10px;
+      background-color: rgb(253, 255, 231);
+    }
+    
+    legend {
+      color: pink;
+      font-weight: bold;
+      padding: 0 10px;
+      font-size: 18px;
+    }
+    
+    label {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    input:focus, select:focus {
+      border: 2px solid #b9c0f2;
+      box-shadow: 0 0 5px #e3fecf;
+      background-color: #fff2f2;
+      outline: none;
+    }
+    
+    input[type="number"]:focus {
+      width: 200px;
+      border: 2px solid #ffcde1;
+      box-shadow: 0 0 5px #d5fff2;
+      background-color: #fff4b0;
+    }
+    
+    input[type="submit"], input[type="reset"], button {
+      padding: 10px 20px;
+      background-color: pink;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      margin: 5px;
+    }
+    
+    input[type="submit"]:hover, button:hover {
+      background-color: #ffb6c1;
+    }
+    
+    #greet {
+      font-size: 24px;
+      color: pink;
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: honeydew;
+      border-radius: 10px;
+    }
+    
+    .demo-section {
+      background-color: #f0f8ff;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 5px solid pink;
+    }
+    
+    .disabled-fieldset {
+      opacity: 0.6;
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 1. GREETING FORM -->
+<div class="demo-section">
+  <h2>Greeting Form</h2>
+  <form onsubmit="return greet();" onreset="clearForm()">
+    <label>Name: 
+      <input type="text" name="names" id="userName" required>
+      <input type="submit" value="Greet">
+      <input type="reset" value="Clear">
+    </label>
+  </form>
+  <p id="greet">Greetings</p>
+</div>
+
+<!-- 2. PERSONAL IDENTIFICATION -->
+<div class="demo-section">
+  <h2>Personal Identification</h2>
+  <fieldset>
+    <legend>Student Info</legend>
+    <label>Student ID: 
+      <input type="number" id="studentid" required onfocus="wide()" onblur="checkEmpty()">
+    </label><br>
+    <label>Full Name: 
+      <input type="text" id="fullname" required onfocus="wideName()" onblur="checkEmpty()">
+    </label>
+  </fieldset>
+</div>
+
+<!-- 3. FORM CONTROLS DEMO -->
+<div class="demo-section">
+  <h2>Form Controls Demo</h2>
+  <form>
+    <fieldset>
+      <legend>Radio Buttons</legend>
+      <label>Grade Level:
+        <input type="radio" name="grade" value="grade7" checked> Grade 7
+        <input type="radio" name="grade" value="grade8"> Grade 8
+        <input type="radio" name="grade" value="grade9"> Grade 9
+      </label>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Checkboxes</legend>
+      <label>Subjects:
+        <input type="checkbox" name="subject" value="math" checked> Math
+        <input type="checkbox" name="subject" value="science"> Science
+        <input type="checkbox" name="subject" value="history"> History
+      </label>
+    </fieldset>
+    
+    <fieldset>
+      <legend>Select Menu</legend>
+      <label>Club: 
+        <select name="club">
+          <option value="likha">LIKHA</option>
+          <option value="kislap">KISLAP</option>
+          <option value="intyalë">INTYALË</option>
+        </select>
+      </label>
+    </fieldset>
+  </form>
+</div>
+
+<!-- 4. DISABLED FIELDSET DEMO -->
+<div class="demo-section">
+  <h2>Disabled Fieldset Demo</h2>
+  <form name="userForm" autocomplete="on" novalidate target="_blank">
+    <fieldset disabled class="disabled-fieldset">
+      <legend>Disabled Fields (Can't Edit)</legend>
+      <label for="name">Name:</label>
+      <input id="name" name="username" type="text" placeholder="John Doe">
+      
+      <label for="email">Email:</label>
+      <input id="email" name="email" type="email" required>
+    </fieldset>
+    <button type="submit">Submit (This Works!)</button>
+  </form>
+</div>
+
+<!-- 5. LOCALSTORAGE DEMO -->
+<div class="demo-section">
+  <h2>LocalStorage Demo</h2>
+  <button onclick="localStorageDemo()">Test LocalStorage CRUD</button>
+  <div id="storageResult"></div>
+</div>
+
+<!-- 6. PRACTICE FORM WITH SAVE -->
+<div class="demo-section">
+  <h2>Practice Form (Saves to LocalStorage)</h2>
+  <form id="practice" onsubmit="saveStudent(); return false;">
+    <fieldset>
+      <legend>Practice Form</legend>
+      <label>Name: <input type="text" id="practiceName" required></label><br><br>
+      <label>Email: <input type="email" id="practiceEmail" required></label><br><br>
+      <label>Age: <input type="number" id="practiceAge" min="1" max="100" required></label><br><br>
+    </fieldset>
+    <button type="submit">Save Student</button>
+  </form>
+</div>
+
+<script>
+  // 1. Greeting functions
+  function greet() {
+    var name = document.getElementById("userName").value.trim();
+    document.getElementById("greet").innerHTML = "Hello, " + name + "!";
+    return false;
+  }
+  
+  function clearForm() {
+    document.getElementById("greet").innerHTML = "Greetings";
+    document.getElementById("userName").value = "";
+    alert("Form cleared!");
+    return false;
+  }
+  
+  // 2. Field functions
+  function wide() {
+    document.getElementById("studentid").style.width = "200px";
+  }
+  
+  function wideName() {
+    document.getElementById("fullname").style.width = "250px";
+  }
+  
+  function checkEmpty() {
+    const studentid = document.getElementById("studentid").value.trim();
+    const fullname = document.getElementById("fullname").value.trim();
+    if (!studentid || !fullname) {
+      alert("Don't leave this empty!");
+    }
+  }
+  
+  // 5. LocalStorage CRUD Demo
+  function localStorageDemo() {
+    let mlpCollection = {
+      twilight: { name: 'Twilight Sparkle', color: 'purple', tribe: 'alicorn' },
+      pinkie: { name: 'Pinkie Pie', color: 'pink', tribe: 'earth pony' },
+      rainbow: { name: 'Rainbow Dash', color: 'blue', tribe: 'pegasi' }
+    };
+    
+    // CREATE
+    localStorage.setItem('mlpCollection', JSON.stringify(mlpCollection));
+    
+    // READ
+    let collection = JSON.parse(localStorage.getItem('mlpCollection') || '{}');
+    document.getElementById('storageResult').innerHTML = 
+      `<strong>Read:</strong> ${collection.rainbow.name}`;
+    
+    // UPDATE
+    collection.rainbow.color = 'rainbow';
+    localStorage.setItem('mlpCollection', JSON.stringify(collection));
+    
+    // DELETE
+    delete collection.twilight;
+    localStorage.setItem('mlpCollection', JSON.stringify(collection));
+    
+    document.getElementById('storageResult').innerHTML += 
+      `<br><strong>After delete:</strong> ${JSON.stringify(collection)}`;
+  }
+  
+  // 6. Practice form save
+  function saveStudent() {
+    const name = document.getElementById("practiceName").value.trim();
+    const email = document.getElementById("practiceEmail").value.trim();
+    const age = document.getElementById("practiceAge").value;
+    
+    let student = { name, email, age, timestamp: new Date().toLocaleString() };
+    localStorage.setItem("student", JSON.stringify(student));
+    
+    alert("Student saved!\n" + JSON.stringify(student, null, 2));
+  }
+  
+  // Load saved student on page load
+  window.onload = function() {
+    let saved = localStorage.getItem("student");
+    if (saved) {
+      let student = JSON.parse(saved);
+      console.log("Saved student:", student);
+    }
+  }
+
+
+
+
+  function ans(input){
+    obj = JSON.parse(input) // JSON.parse converts text input into object data type. DO NOT REMOVE THIS PART
+   // type your answer inside this function.  Use obj variable containing the input in object data type.
+   let sum = 0; 
+   for (let i = 0; i < obj.transactions.length; i++){
+       let track = obj.transactions[i]; 
+       for (let j = 0; j < track.items.length; j++){
+       sum = sum + track.items[j].price; 
+
+       }
+   }
+   let answer = 1000 - sum; 
+   if (answer <= 0){
+       console.log("Quota reached already!")
+   }
+   else if (answer === 1000){
+       console.log("Need 1000.00 to reach the 1000 pesos quota for the day")
+   }
+   else {
+   console.log("Need " + answer + " to reach the 1000 pesos quota for the day"); 
+   }
+ 
+ 
+} 
+// DO NOT REMOVE CODE FROM THIS POINT ON
+    input =""
+    process.stdin.on("data", d => input += d ).on('end', () => ans(input))  // to read input test cases
+
+
+
+function getTheBest(obj) {     
+    // place your code here
+   
+    let names = [];
+    let raters = 0
+    let raterskey= ""
+    for (var keys in obj){
+        names.push(keys)
+    }
+    for (var key in obj){
+        for (let i = 0; i < obj[key].length; i++){
+            if (obj[key][i].age_group === 'Kids'){
+                names.push(key)
+                let nextkey = names[i+1]
+                let pastkey = names[i-1]
+                temp1 = obj[key][i].rating 
+                temp2 = obj[nextkey][i].rating
+                if (obj[key][i].rating > raters && obj[nextkey][i].rating !== null){
+                    raters = obj[key][i].rating;
+                    raterskey=key
+                }
+                else if (obj[nextkey][i].rating == null && raters > obj[key][i].rating){
+                    raters = obj[pastkey][i].rating;
+                    raterskey=nextkey
+                }
+                
+                /*else if (obj[key][i].rating < obj[nextkey][i].rating) {
+                    raters = obj[nextkey][i].rating
+                    console.log(raters)
+                } */
+            } 
+        } 
+    }
+    best = raters
+    console.log("Best kid show is " + raterskey + " with a rating of " + raters)
+    //return best;  // best should contain the name of the show and its rating   
+ 
+}
+
+// DO NOT REMOVE CODE FROM THIS POINT ON
+// this function will convert test data into an object and pass it on to getTheBest() function
+// this will also print the final output using data received from getTheBest() function
+function ans(input){
+    obj = JSON.parse(input);
+    
+    const bestShow = getTheBest(obj);
+    // console.log the name of the best show here and its rating
+
+} 
+
+// this will get data from the test cases and do not change anything here
+let input ="";
+process.stdin.on("data", d => input += d ).on('end', () => ans(input));  // to read input test cases
+
+
+
+function highestWisdomMission(missions) {
+  let bestMission = null;
+  let bestAvg = -Infinity;
+  let sum = 0;
+  let array = []
+  let arrayname = []
+  for (let key in missions){
+      let sum = 0
+      for (let i = 0; i < missions[key].length; i++){
+          sum = sum + missions[key][i].wisdom 
+          
+      }
+      array.push(sum);
+      arrayname.push(key);
+  }
+  if (array[0] > array[1]){
+      return arrayname[0]
+  }
+  else if (array[0] < array[1]){
+      return arrayname[1]
+  }
+  else {
+      return arrayname[0]
+  }
+}
+
+
+function averageStrength(missions) {
+    let calc = 0; 
+    let array = []
+    for (let key in missions){
+    let divide = 0; 
+    let sum = 0; 
+        for (let i = 0; i < missions[key].length; i++){
+            sum = sum + missions[key][i].strength; 
+        }
+    divide = sum / missions[key].length; 
+    if (divide % 2 == 0 || divide % 1 == 0){
+        array.push(divide)
+    }
+    else{
+    array.push(Number(divide.toFixed(2)));
+    }
+    }
+    return array
+}
+</script>
+
+</body>
+</html>

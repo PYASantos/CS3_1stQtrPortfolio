@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Organization Application</title>
+  <style>
+    /* General Styles */
+    body { 
+      background-color: seashell; 
+      font-family: Courier New; 
+      margin: 0; 
+      padding: 0; 
+    }
+    header { 
+      background-color: honeydew; 
+      color: white; 
+      padding: 2em; 
+      text-align: center; 
+    } 
+    footer { 
+      text-align: center; 
+      padding: 1em; 
+      background-color: honeydew; 
+    }
+    h1 { 
+      color: pink; 
+      text-align: center; 
+      font-family: monospace; 
+      font-size: 35px; 
+    }
+    p, li { 
+      color: DarkSeaGreen; 
+      text-align: center; 
+      font-family: Courier New; 
+      font-size: 20px; 
+    }
+/* Form Styles */
+    form {
+      background-color: honeydew; 
+      padding: 20px; 
+      margin: 20px auto;
+      border: 2px solid #ccc; border-radius: 10px; max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    }
+    fieldset {
+      border: 1px solid #b0afaf; 
+      border-radius: 8px; 
+      margin-bottom: 20px; 
+      padding: 20px; 
+    }
+/*css for the pink submit button*/
+
+    button {
+      padding: 10px 25px; 
+      font-family: 'Courier New', Courier, monospace;
+      color: white; 
+      background-color: pink; 
+      font-size: 16px; 
+      font-weight: bold;
+      border: none; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      margin: 10px; 
+      transition: 0.3s; 
+    }
+    button:hover { background-color: #ffb6c1; transform: scale(1.05); }
+
+    /* CSS for the Pink Delete Button */
+    .delete-btn {
+      float: right;
+      background-color: pink;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+    }
+    .delete-btn:hover {
+      background-color: #ffb6c1;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%; max-width: 600px; margin: 20px auto;
+      border-collapse: collapse; background-color: honeydew;
+      border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: pink; color: white; font-weight: bold; }
+    
+    /* Star Rating CSS */
+    .rating { direction: rtl; display: inline-block; font-size: 0; margin-top: 10px; }
+    .rating label { display: inline-block; width: 1.3em; font-size: 25px; color: #ddd; cursor: pointer; position: relative; }
+    .rating label::before { content: "★"; position: absolute; left: 0; top: 0; }
+    .rating input:checked ~ label { color: gold; }
+    .rating input { display: none; }
+    .movie-list-title { text-align: center; color: pink; font-size: 28px; font-family: monospace; font-weight: bold; margin: 20px auto; max-width: 600px; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Patricia Ysabel Santos ~ 9-Strontium ~ March 10, 2026 ~ March 12, 2026</p>
+    <h1>𝜗𝜚 ࣪˖ ִ𐙚 Add a Movie 𝜗𝜚 ࣪˖ ִ𐙚</h1>
+  </header>
+<!-- Form Section -->
+  <form onsubmit="return Submit()">
+    <fieldset>
+      <label>Title: <input type="text" name="title" required onblur="Blur(this)"></label> <br><br>
+      <label>Year: <input type="number" name="year" required onblur="Blur(this)"></label> <br><br>
+      <label>Genre: </label> 
+      <select id="genre" name="genre" required onblur="Blur(this)">
+        <option value="ACTION">Action</option> 
+        <option value="COMEDY">Comedy</option>
+        <option value="DRAMA">Drama</option>
+        <option value="HORROR">Horror</option>
+        <option value="THRILLER">Thriller</option>
+        <option value="ROMANCE">Romance</option>
+        <option value="SCI-FI">Sci-fi</option>
+      </select> <br><br>
+
+      <div class="rating">
+        Rating: 
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" required /><label for="star1"></label>    
+      </div>
+    </fieldset>
+    <button type="submit">Add Movie</button>
+  </form>
+<!-- Movie List Section -->
+  <div class="movie-list-title">Movie List</div>
+
+  <table id="movieTable">
+    <thead>
+      <tr><th>Movies</th></tr>
+    </thead>
+    <tbody id="movieTableBody"></tbody>
+  </table>
+
+  <footer><p>&copy; 2025 Patricia Santos</p></footer>
+
+  <script> 
+  // function to validate form fields and highlight empty fields with red border and light red background
+    function Blur(element) {
+      if (element.value.trim() === "") {
+        element.style.border = "1px solid #ff4d4d";
+        element.style.backgroundColor = "#fff2f2";
+      } else {
+        element.style.border = ""; element.style.backgroundColor = ""; 
+      }
+    }
+// constant key for local storage and initialization of movie list from local storage or empty array if not found
+    const KEY = 'MovieList';
+    let movieList = JSON.parse(localStorage.getItem(KEY)) || [];
+// function to handle form submission with confirmation prompt before saving movie data to local storage
+    function Submit() {
+      if (confirm("Do you want to proceed with adding this movie?")) {
+        saveToLocalStorage(); 
+        return false;
+      }
+      return false;
+    }
+// function to save movie data into local storage, check for duplicates, and update existing entry with new information and average ratings if duplicate is found
+    function saveToLocalStorage() {
+      const title = document.getElementsByName("title")[0].value.trim();
+      const year = document.getElementsByName("year")[0].value.trim();
+      const genre = document.getElementsByName("genre")[0].value.trim();
+      const ratingRadio = document.querySelector('input[name="rating"]:checked');
+      const newRating = parseInt(ratingRadio ? ratingRadio.value : "0");
+
+      let existingIndex = -1; 
+      for (let i = 0; i < movieList.length; i++) {
+        if (movieList[i].title.toUpperCase() === title.toUpperCase()) {
+          existingIndex = i; 
+          break; 
+        }
+      }
+
+      if (existingIndex !== -1) {
+
+        const oldMovie = movieList[existingIndex];
+        const averageRating = Math.round((parseInt(oldMovie.rating) + newRating) / 2);
+        
+        movieList[existingIndex] = { 
+            title: title, 
+            year: year, 
+            genre: genre, 
+            rating: averageRating.toString() 
+        };
+        alert('Movie updated and rating averaged!');
+      } 
+      else {
+
+        movieList.push({ title, year, genre, rating: newRating.toString() });
+        alert('Movie saved successfully!');
+      }
+      
+      localStorage.setItem(KEY, JSON.stringify(movieList));
+      document.querySelector('form').reset();
+      renderTable();
+    }
+// function to edit movie information by filling the form with existing data and allowing user to update it    
+    function deleteMovie(index){
+      if(confirm("Are you sure you want to delete this movie?")){
+        movieList.splice(index, 1);
+        localStorage.setItem(KEY, JSON.stringify(movieList)); 
+        renderTable();
+      }
+    }
+// function to render movie list in the table with star rating display and delete button for each movie entry
+    function renderTable() {
+      const tbody = document.getElementById('movieTableBody');
+      let tablerows = "";
+      
+      for (let i = 0; i < movieList.length; i++) {
+        const movie = movieList[i];
+        const ratingNum = parseInt(movie.rating) || 0;
+        
+        let stars = "";
+        for(let j = 0; j < ratingNum; j++){
+            stars = stars + "★";
+        }
+        while(stars.length < 5){
+            stars = stars + "☆";
+        }
+        
+        const movieText = `${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${stars}`;
+        
+        tablerows += `
+          <tr>
+            <td>
+              ${movieText}
+              <button class="delete-btn" onclick="deleteMovie(${i})">Delete</button>
+            </td>
+          </tr>`;
+      }
+      tbody.innerHTML = tablerows;
+    }
+// render the movie list table on page load to display existing movies from local storage
+    window.onload = renderTable;
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<script> 
+function getTheBest(obj) {     
+    // place your code here
+   
+    let names = [];
+    let raters = 0
+    let raterskey= ""
+    for (var keys in obj){
+        names.push(keys)
+    }
+    for (var key in obj){
+        for (let i = 0; i < obj[key].length; i++){
+            if (obj[key][i].age_group === 'Kids'){
+                names.push(key)
+                let nextkey = names[i+1]
+                let pastkey = names[i-1]
+                temp1 = obj[key][i].rating 
+                temp2 = obj[nextkey][i].rating
+                if (obj[key][i].rating > raters && obj[nextkey][i].rating !== null){
+                    raters = obj[key][i].rating;
+                    raterskey=key
+                }
+                else if (obj[nextkey][i].rating == null && raters > obj[key][i].rating){
+                    raters = obj[pastkey][i].rating;
+                    raterskey=nextkey
+                }
+                
+                /*else if (obj[key][i].rating < obj[nextkey][i].rating) {
+                    raters = obj[nextkey][i].rating
+                    console.log(raters)
+                } */
+            } 
+        } 
+    }
+    best = raters
+    console.log("Best kid show is " + raterskey + " with a rating of " + raters)
+    //return best;  // best should contain the name of the show and its rating   
+ 
+}
+
+// DO NOT REMOVE CODE FROM THIS POINT ON
+// this function will convert test data into an object and pass it on to getTheBest() function
+// this will also print the final output using data received from getTheBest() function
+function ans(input){
+    obj = JSON.parse(input);
+    
+    const bestShow = getTheBest(obj);
+    // console.log the name of the best show here and its rating
+
+} 
+
+// this will get data from the test cases and do not change anything here
+let input ="";
+process.stdin.on("data", d => input += d ).on('end', () => ans(input));  // to read input test cases
+
+
+
+
+
+function ans(input){
+    obj = JSON.parse(input) // JSON.parse converts text input into object data type. DO NOT REMOVE THIS PART
+   // type your answer inside this function.  Use obj variable containing the input in object data type.
+   let sum = 0; 
+   for (let i = 0; i < obj.transactions.length; i++){
+       let track = obj.transactions[i]; 
+       for (let j = 0; j < track.items.length; j++){
+       sum = sum + track.items[j].price; 
+
+       }
+   }
+   let answer = 1000 - sum; 
+   if (answer <= 0){
+       console.log("Quota reached already!")
+   }
+   else if (answer === 1000){
+       console.log("Need 1000.00 to reach the 1000 pesos quota for the day")
+   }
+   else {
+   console.log("Need " + answer + " to reach the 1000 pesos quota for the day"); 
+   }
+ 
+ 
+} 
+// DO NOT REMOVE CODE FROM THIS POINT ON
+    input =""
+    process.stdin.on("data", d => input += d ).on('end', () => ans(input))  // to read input test cases
+
+
+
+
+</script>
